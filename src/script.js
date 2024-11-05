@@ -86,6 +86,17 @@ graveColorTexture.colorSpace = THREE.SRGBColorSpace
 graveColorTexture.repeat.set(0.3, 0.4)
 graveARMTexture.repeat.set(0.3, 0.4)
 graveNormalTexture.repeat.set(0.3, 0.4)
+
+//Door Textures
+const doorColorTexture = textureLoader.load('./door/color.jpg')
+const doorAlphaTexture = textureLoader.load('./door/alpha.jpg')
+const doorAmbientOcclusionTexture = textureLoader.load('./door/ambientOcclusion.jpg')
+const doorHeightTexture = textureLoader.load('./door/height.jpg')
+const doorNormalTexture = textureLoader.load('./door/normal.jpg')
+const doorMetalnessTexture = textureLoader.load('./door/metalness.jpg')
+const doorRoughnessTexture = textureLoader.load('./door/roughness.jpg')
+
+doorColorTexture.coloreSpace = THREE.SRGBColorSpace
 /**
  * House
  */
@@ -147,12 +158,25 @@ gui.add(floor.material, 'displacementBias').min(-1).max(1).step(0.001).name('flo
 
 //Door
 const door = new THREE.Mesh(
-    new THREE.PlaneGeometry(2.2, 2.2),
-    new THREE.MeshStandardMaterial( )
+    new THREE.PlaneGeometry(2.2, 2.2, 100, 100),
+    new THREE.MeshStandardMaterial({
+        alphaMap: doorAlphaTexture,
+        transparent: true,
+        map: doorColorTexture,
+        aoMap: doorAmbientOcclusionTexture,
+        roughnessMap: doorRoughnessTexture,
+        metalnessMap: doorMetalnessTexture,
+        normalMap: doorNormalTexture,
+        displacementMap: doorHeightTexture,
+        displacementScale: 0.15,
+        displacementBias: -0.04,
+    })
 )
 door.position.y = 1
 door.position.z = 2 + 0.01
 house.add(door)
+gui.add(door.material, 'displacementScale').min(0).max(1).step(0.001).name('doorDisplacementScale')
+gui.add(door.material, 'displacementBias').min(-1).max(1).step(0.001).name('doorDisplacementBias')
 
 //Bushes
 const bushGeometry = new THREE.SphereGeometry(1, 16, 16)
