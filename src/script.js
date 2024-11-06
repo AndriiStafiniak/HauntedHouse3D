@@ -20,7 +20,7 @@ const scene = new THREE.Scene()
 //Textures
 const textureLoader = new THREE.TextureLoader()
 //Floor
-const floorAlphaTexture = textureLoader.load('./floor/alpha.jpg')
+const floorAlphaTexture = textureLoader.load('./floor/alpha.webp')
 const floorColorTexture = textureLoader.load('./floor/coast_sand_rocks_02_1k/coast_sand_rocks_02_diff_1k.webp')
 const floorARMTexture = textureLoader.load('./floor/coast_sand_rocks_02_1k/coast_sand_rocks_02_arm_1k.webp')
 const floorNormalTexture = textureLoader.load('./floor/coast_sand_rocks_02_1k/coast_sand_rocks_02_nor_gl_1k.webp')
@@ -90,13 +90,13 @@ graveARMTexture.repeat.set(0.3, 0.4)
 graveNormalTexture.repeat.set(0.3, 0.4)
 
 //Door Textures
-const doorColorTexture = textureLoader.load('./door/color.jpg')
-const doorAlphaTexture = textureLoader.load('./door/alpha.jpg')
-const doorAmbientOcclusionTexture = textureLoader.load('./door/ambientOcclusion.jpg')
-const doorHeightTexture = textureLoader.load('./door/height.jpg')
-const doorNormalTexture = textureLoader.load('./door/normal.jpg')
-const doorMetalnessTexture = textureLoader.load('./door/metalness.jpg')
-const doorRoughnessTexture = textureLoader.load('./door/roughness.jpg')
+const doorColorTexture = textureLoader.load('./door/color.webp')
+const doorAlphaTexture = textureLoader.load('./door/alpha.webp')
+const doorAmbientOcclusionTexture = textureLoader.load('./door/ambientOcclusion.webp')
+const doorHeightTexture = textureLoader.load('./door/height.webp')
+const doorNormalTexture = textureLoader.load('./door/normal.webp')
+const doorMetalnessTexture = textureLoader.load('./door/metalness.webp')
+const doorRoughnessTexture = textureLoader.load('./door/roughness.webp')
 
 doorColorTexture.coloreSpace = THREE.SRGBColorSpace
 /**
@@ -359,6 +359,9 @@ sky.material.uniforms['rayleigh'].value = 3
 sky.material.uniforms['mieCoefficient'].value = 0.1
 sky.material.uniforms['mieDirectionalG'].value = 0.95
 sky.material.uniforms['sunPosition'].value.set(0.3, -0.038, -0.95)
+
+//Fog
+scene.fog = new THREE.FogExp2('#02343f', 0.1)
 /**
  * Animate
  */
